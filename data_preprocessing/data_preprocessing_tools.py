@@ -7,7 +7,7 @@ import pandas as pd # import the dataset and create the metrics and features
 
 # Importing the dataset
 # iloc = locate indexes
-dataset = pd.read_csv('Data.csv')
+dataset = pd.read_csv('data_preprocessing/Data.csv')
 X = dataset.iloc[:, :-1].values # the features (independant variables) matrix
 y = dataset.iloc[:, -1].values  # the dependant variable vector
 print('X =\n', X, '\n')
