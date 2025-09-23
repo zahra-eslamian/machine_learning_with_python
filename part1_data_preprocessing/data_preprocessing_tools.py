@@ -1,5 +1,5 @@
 # Data Preprocessing Tools
-
+# 
 # Importing the libraries
 import numpy as np  # to working with arrays
 import matplotlib.pyplot as plt # plot charts and graphs
@@ -7,7 +7,7 @@ import pandas as pd # import the dataset and create the metrics and features
 
 # Importing the dataset
 # iloc = locate indexes
-dataset = pd.read_csv('data_preprocessing/Data.csv')
+dataset = pd.read_csv('part1_data_preprocessing/Data.csv')
 X = dataset.iloc[:, :-1].values # the features (independant variables) matrix
 y = dataset.iloc[:, -1].values  # the dependant variable vector
 print('X =\n', X, '\n')

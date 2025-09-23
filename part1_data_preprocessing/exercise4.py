@@ -38,6 +38,10 @@ iris_df = pd.read_csv('iris.csv')
 X = iris_df.drop('target', axis=1)  # Assuming 'target' is the column name for the target variable
 y = iris_df['target']
 
+# Code from geeksforgeeks
+# x = df.drop('target',axis=1) 
+# y = df[['target']]
+
 # Split the dataset into an 80-20 training-test set
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
