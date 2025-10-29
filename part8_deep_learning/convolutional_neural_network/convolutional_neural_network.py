@@ -1,8 +1,6 @@
 import tensorflow as tf
 
-# -----------------------
-# Paths (your existing layout)
-# -----------------------
+# Paths
 TRAIN_DIR = "part8_deep_learning/convolutional_neural_network/dataset/training_set"
 TEST_DIR  = "part8_deep_learning/convolutional_neural_network/dataset/test_set"
 SINGLE_IMG = "part8_deep_learning/convolutional_neural_network/dataset/single_prediction/cat_or_dog_3.jpg"
@@ -11,9 +9,7 @@ IMG_SIZE = (64, 64)
 BATCH_SIZE = 32
 SEED = 1337
 
-# -----------------------
-# Data loading (replacement for ImageDataGenerator + flow_from_directory)
-# -----------------------
+# Part 1 - Data Preprocessing
 train_set = tf.keras.utils.image_dataset_from_directory(
     TRAIN_DIR,
     labels="inferred",
@@ -34,7 +30,13 @@ test_set = tf.keras.utils.image_dataset_from_directory(
 )
 
 # Save class names
-class_names = train_set.class_names  # e.g. ['cats', 'dogs']
+class_names = train_set.class_names
+print("class_names:", class_names)   # check order (alphabetical by folder names)
+
+# inspect a batch of labels
+for imgs, labels in train_set.take(1):
+    print("sample labels (0/1):", labels[:10].numpy().reshape(-1))
+    break  # just one batch
 
 # Define an augmentation pipeline
 augmenter = tf.keras.Sequential(
@@ -98,6 +100,10 @@ test_image = tf.keras.utils.img_to_array(test_image)
 test_image = test_image / 255.0                     # match dataset scaling
 test_image = tf.expand_dims(test_image, axis=0)     # (1, 64, 64, 3)
 
-prob = cnn.predict(test_image)[0, 0]
-label_idx = 1 if prob >= 0.5 else 0
-print(class_names[label_idx])
+
+result = cnn.predict(test_image)
+if result[0][0] == 1: # the first dimention is the batch and the second dimention is the single image in that batch
+  prediction = 'dog'
+else:
+  prediction = 'cat'
+print(prediction)
